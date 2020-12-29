@@ -1,0 +1,38 @@
+pre {
+    position: relative;
+    border-radius: 2px;
+    background-color: #f8f8f8;
+    font-size: 0.85em;
+    font-family: "Roboto Mono",
+        Monaco,
+        courier,
+        monospace;
+
+    -webkit-font-smoothing: initial;
+    -moz-osx-font-smoothing: initial;
+}
+
+pre code {
+    display: block;
+    overflow-x: auto;
+    padding: 1.2em 1.4em;
+    color: #525252;
+    white-space: pre;
+    font-size: 0.85rem;
+    line-height: 1.6rem;
+}
+
+pre code[class*="language-"]::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px 0;
+    height: 15px;
+    color: #ccc;
+    content: attr(data-language);
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.9em;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    line-height: 15px;
+}
