@@ -7,8 +7,7 @@ const IM = new HeartBeat({
 
 console.log(IM);
 
-IM.addEventListener('onmessage', e => console.log('onmessage'))
-IM.onclose = e => console.log('onclose');
+IM.addEventListener('message', e => console.log(e.data))
 
 setTimeout(() => {
     IM.send('aaa')

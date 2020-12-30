@@ -39,10 +39,10 @@ export default class HeartBeat extends EventTarget {
     }
 
     initEventHandle() {
-        this.onopen = event => {}
-        this.onmessage = event => {}
-        this.onerror = event => {}
-        this.onclose = event => {}
+        this.onopen = null
+        this.onmessage = null
+        this.onerror = null
+        this.onclose = null
     }
 
     send(data) {
@@ -61,19 +61,23 @@ export default class HeartBeat extends EventTarget {
         this.ws = new WebSocket(this.url);
         //
         this.ws.addEventListener("open", (e) => {
-            this.onopen(e)
+            this.dispatchEvent(new Event('open'))
+            this.onopen && this.onopen(e)
             this.reset();
         });
         this.ws.addEventListener("message", (e) => {
-            this.onmessage(e)
+            this.dispatchEvent(new MessageEvent('message', { data: e.data }))
+            this.onmessage && this.onmessage(e)
             this.reset();
         });
         this.ws.addEventListener("error", (e) => {
-            this.onerror(e)
+            this.dispatchEvent(new ErrorEvent('error', { message: e.message }))
+            this.onerror && this.onerror(e)
             this.reconnect();
         });
         this.ws.addEventListener("close", (e) => {
-            this.onclose(e)
+            this.dispatchEvent(new CloseEvent('close', { code: e.code, reason: e.reason, wasClean: e.wasClean }))
+            this.onclose && this.onclose(e)
             this.reconnect();
         });
     }
@@ -85,7 +89,7 @@ export default class HeartBeat extends EventTarget {
             if (this.ws.readyState === 1) {
                 this.ws.send(
                     JSON.stringify({
-                        heartbeat: "ping",
+                        heartbeat: this.pingMsg,
                     })
                 );
             }
