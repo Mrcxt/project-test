@@ -1,0 +1,75 @@
+{
+    "name": "vue-cli3",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "cross-env VUE_APP_NETWORK=inside vue-cli-service serve ",
+        "/注释": "// yarn build:inside命令 用以生成内网215生产文件，yarn build 用以生成外网生产文件",
+        "build:inside": "cross-env VUE_APP_NETWORK=inside vue-cli-service build",
+        "build:215": "yarn build:inside",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "report": "npm_config_report=true yarn build",
+        "//注释": "// yarn git:update命令用来更新本地远程库索引",
+        "git:update": "git remote update origin upstream --prune",
+        "///注释": "// yarn changelog命令 用以生成CHANGELOG.md历史",
+        "changelog": "yarn git:update && conventional-changelog -p jquery -i CHANGELOG.md -s -r 0",
+        "changelog:deploy": "yarn changelog && git add CHANGELOG.md && git commit -m 'docs: changelog'"
+    },
+    "dependencies": {
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
+        "animate.css": "^3.7.2",
+        "axios": "^0.19.0",
+        "babel-plugin-transform-remove-console": "^6.9.4",
+        "commitizen": "^4.0.3",
+        "core-js": "^3.3.2",
+        "csstool.css": "^1.0.3",
+        "dayjs": "^1.8.17",
+        "element-ui": "^2.12.0",
+        "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "normalize.css": "^8.0.1",
+        "uuid": "^3.3.3",
+        "vant": "2.2.12",
+        "vue": "^2.6.10",
+        "vue-router": "^3.1.3",
+        "xss": "^1.0.6"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^4.0.0",
+        "@vue/cli-plugin-eslint": "^4.0.0",
+        "@vue/cli-service": "^4.0.0",
+        "@vue/eslint-config-prettier": "^5.0.0",
+        "babel-eslint": "^10.0.3",
+        "babel-plugin-import": "^1.12.2",
+        "cross-env": "^6.0.3",
+        "cz-conventional-changelog": "3.0.2",
+        "eslint": "^5.16.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "eslint-plugin-vue": "^5.0.0",
+        "husky": "^3.0.9",
+        "less": "^3.10.3",
+        "less-loader": "^5.0.0",
+        "prettier": "^1.18.2",
+        "vue-template-compiler": "^2.6.10",
+        "webpack-bundle-analyzer": "^3.6.0"
+    },
+    "husky": {
+        "hooks": {
+            "//注释 pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "*.{js,vue}": [
+            "vue-cli-service lint",
+            "git add"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}

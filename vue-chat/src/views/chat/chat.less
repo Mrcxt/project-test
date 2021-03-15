@@ -1,0 +1,165 @@
+@tips_bgcolor: #bebebe;
+@time_bgcolor: #c9c9c9;
+@body_bgcolor: #e5e5e5;
+
+.chat {
+  display: flex;
+  flex: 1;
+  width: 100%;
+
+  .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+
+    .main {
+      position: relative;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 0 10px;
+      height: 100%;
+      background-color: @body_bgcolor;
+
+      .unreadmsg {
+        position: absolute;
+        right: 0px;
+        bottom: 10px;
+        padding: 5px 10px;
+        border-radius: 10000px 0 0 10000px;
+        background-color: #f2826a;
+        color: #fff;
+        font-size: 12px;
+      }
+
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: all .5s;
+      }
+
+      .fade-enter,
+      .fade-leave-to {
+        transform: translateX(100%);
+      }
+
+      .msg__groups {
+        overflow-y: scroll;
+        flex: 1;
+
+        &>ul {
+          &>li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+
+          }
+
+          li.msg__box {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .msg__box-avatar {}
+
+            .msg__box-info {
+              flex: auto;
+              flex-grow: 0;
+              flex-shrink: 1;
+              padding: 10px 15px;
+              border-radius: 15px;
+              background-color: #fff;
+              word-break: break-all;
+              font-size: 13px;
+              line-height: 1.5;
+
+              /deep/ img {
+                width: 100%;
+                height: 100%;
+              }
+
+              /deep/ p {
+                margin: 0;
+                padding: 0;
+              }
+            }
+
+            &[data-rule="0"] {
+              flex-direction: row-reverse;
+
+              .msg__box-info {
+                margin-right: 10px;
+                margin-left: 60px;
+                border-top-right-radius: 5px;
+                background-color: #ffe62c;
+              }
+            }
+
+            &[data-rule="1"] {
+              .msg__box-info {
+                margin-right: 60px;
+                margin-left: 10px;
+                border-top-left-radius: 5px;
+              }
+            }
+
+            // 选项卡1
+            .prompts {}
+          }
+        }
+      }
+
+    }
+
+    .hotquestion__group {
+      display: flex;
+      overflow-x: scroll;
+      width: 100%;
+      background-color: #f2f2f2;
+
+      ul {
+        display: flex;
+        flex-shrink: 0;
+        padding: 5px 10px;
+
+        li {
+          flex-shrink: 0;
+          margin: 0 5px;
+          padding: 3px 8px;
+          border: 1px solid #c9c9c9;
+          border-radius: 10000px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .footer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding: 0 5px;
+      padding-bottom: 50px;
+      height: 100px;
+      background-color: #f2f2f2;
+
+      // 
+      /deep/ .van-cell {
+        margin-right: 20px;
+        border-radius: 100px;
+      }
+
+      .keyquestion__group {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        transform: translateY(-100%);
+      }
+    }
+  }
+}
